@@ -1,46 +1,23 @@
 const express = require('express');
 const router = express.Router();
+const taskController = require('../controllers/taskController');
 
-// 模拟任务数据
-let tasks = [];
-let taskId = 1;
+// 原有：获取所有任务
+router.get('/', taskController.getAllTasks);
 
-// 获取任务列表
-router.get('/', (req, res) => {
-  res.json(tasks);
-});
+// 新增：任务筛选接口（支持查询参数）
+router.get('/filter', taskController.filterTasks);
 
-// 创建任务
-router.post('/', (req, res) => {
-  const { title, description } = req.body;
-  const task = { id: taskId++, title, description, completed: false };
-  tasks.push(task);
-  res.status(201).json(task);
-});
+// 原有：创建任务
+router.post('/', taskController.createTask);
 
-// 获取单个任务
-router.get('/:id', (req, res) => {
-  const task = tasks.find(t => t.id === parseInt(req.params.id));
-  if (task) res.json(task);
-  else res.status(404).json({ message: '任务不存在' });
-});
+// 原有：获取单个任务
+router.get('/:id', taskController.getTaskById);
 
-// 更新任务
-router.put('/:id', (req, res) => {
-  const task = tasks.find(t => t.id === parseInt(req.params.id));
-  if (!task) return res.status(404).json({ message: '任务不存在' });
-  task.title = req.body.title || task.title;
-  task.description = req.body.description || task.description;
-  task.completed = req.body.completed ?? task.completed;
-  res.json(task);
-});
+// 原有：更新任务
+router.put('/:id', taskController.updateTask);
 
-// 删除任务
-router.delete('/:id', (req, res) => {
-  const index = tasks.findIndex(t => t.id === parseInt(req.params.id));
-  if (index === -1) return res.status(404).json({ message: '任务不存在' });
-  tasks.splice(index, 1);
-  res.json({ message: '任务已删除' });
-});
+// 原有：删除任务
+router.delete('/:id', taskController.deleteTask);
 
 module.exports = router;
