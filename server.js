@@ -1,61 +1,17 @@
 ﻿const express = require("express");
-require("dotenv").config();
-
 const app = express();
 
-// 中间件
 app.use(express.json());
 
-// 美化首页 - 返回 HTML 页面
-app.get("/", (req, res) => {
-  res.send(`
-    <!DOCTYPE html>
-    <html>
-    <head>
-        <title>Task API Service - 12</title>
-        <style>
-            body { font-family: Arial, sans-serif; max-width: 800px; margin: 40px auto; padding: 20px; }
-            h1 { color: #333; }
-            .endpoint { background: #f5f5f5; padding: 10px; margin: 10px 0; border-radius: 5px; }
-            code { background: #eee; padding: 2px 5px; }
-        </style>
-    </head>
-    <body>
-        <h1>🚀 Task API Service - 12</h1>
-        <p>基于 Node.js 和 Express 的 RESTful API 服务</p>
-        
-        <h2>📚 API 端点</h2>
-        
-        <div class="endpoint">
-            <h3>认证接口</h3>
-            <p><code>POST /api/auth/register</code> - 用户注册</p>
-            <p><code>POST /api/auth/login</code> - 用户登录</p>
-        </div>
-        
-        <div class="endpoint">
-            <h3>任务接口</h3>
-            <p><code>GET /api/tasks</code> - 获取任务列表</p>
-            <p><code>POST /api/tasks</code> - 创建任务</p>
-            <p><code>GET /api/tasks/:id</code> - 获取任务详情</p>
-            <p><code>PUT /api/tasks/:id</code> - 更新任务</p>
-            <p><code>DELETE /api/tasks/:id</code> - 删除任务</p>
-        </div>
-        
-        <div class="endpoint">
-            <h3>工具接口</h3>
-            <p><code>GET /health</code> - 健康检查</p>
-            <p><code>GET /api</code> - API 文档 (JSON)</p>
-        </div>
-        
-        <p><strong>学号:</strong> 2024131012</p>
-    </body>
-    </html>
-  `);
-});
+let tasks = [
+  { id: 1, title: "学习Node.js", status: "completed", priority: "high" },
+  { id: 2, title: "编写API文档", status: "in-progress", priority: "medium" },
+  { id: 3, title: "测试接口", status: "pending", priority: "high" },
+  { id: 4, title: "部署项目", status: "pending", priority: "low" }
+];
 
-// 健康检查端点
 app.get("/health", (req, res) => {
-  res.status(200).json({ 
+  res.json({
     status: "OK",
     service: "Task API Service",
     version: "1.0.0",
@@ -63,35 +19,79 @@ app.get("/health", (req, res) => {
   });
 });
 
-// API 文档端点 (JSON 格式)
-app.get("/api", (req, res) => {
+app.get("/api/tasks", (req, res) => {
+  let filteredTasks = [...tasks];
+  const { status, priority } = req.query;
+  
+  if (status) {
+    filteredTasks = filteredTasks.filter(task => task.status === status);
+  }
+  
+  if (priority) {
+    filteredTasks = filteredTasks.filter(task => task.priority === priority);
+  }
+  
   res.json({
-    message: "Task API Service - 文档",
-    studentId: "2024131012",
-    endpoints: {
-      auth: {
-        register: { method: "POST", path: "/api/auth/register", description: "用户注册" },
-        login: { method: "POST", path: "/api/auth/login", description: "用户登录" }
-      },
-      tasks: {
-        getAll: { method: "GET", path: "/api/tasks", description: "获取任务列表" },
-        create: { method: "POST", path: "/api/tasks", description: "创建任务" },
-        getOne: { method: "GET", path: "/api/tasks/:id", description: "获取任务详情" },
-        update: { method: "PUT", path: "/api/tasks/:id", description: "更新任务" },
-        delete: { method: "DELETE", path: "/api/tasks/:id", description: "删除任务" }
-      },
-      utility: {
-        health: { method: "GET", path: "/health", description: "健康检查" },
-        docs: { method: "GET", path: "/api", description: "API文档" }
-      }
-    }
+    message: "获取任务成功",
+    total: filteredTasks.length,
+    filters: { status, priority },
+    tasks: filteredTasks
   });
 });
 
-const PORT = process.env.PORT || 3000;
+app.post("/api/tasks", (req, res) => {
+  const { title, description, status, priority } = req.body;
+  
+  const newTask = {
+    id: tasks.length + 1,
+    title,
+    description: description || "",
+    status: status || "pending",
+    priority: priority || "medium",
+    createdAt: new Date().toISOString()
+  };
+  
+  tasks.push(newTask);
+  
+  res.status(201).json({
+    message: "任务创建成功",
+    task: newTask
+  });
+});
+
+app.put("/api/tasks/:id", (req, res) => {
+  const taskId = parseInt(req.params.id);
+  const taskIndex = tasks.findIndex(task => task.id === taskId);
+  
+  if (taskIndex === -1) {
+    return res.status(404).json({ error: "任务不存在" });
+  }
+  
+  tasks[taskIndex] = { ...tasks[taskIndex], ...req.body };
+  
+  res.json({
+    message: "任务更新成功", 
+    task: tasks[taskIndex]
+  });
+});
+
+app.delete("/api/tasks/:id", (req, res) => {
+  const taskId = parseInt(req.params.id);
+  const taskIndex = tasks.findIndex(task => task.id === taskId);
+  
+  if (taskIndex === -1) {
+    return res.status(404).json({ error: "任务不存在" });
+  }
+  
+  const deletedTask = tasks.splice(taskIndex, 1)[0];
+  
+  res.json({
+    message: "任务删除成功",
+    task: deletedTask
+  });
+});
+
+const PORT = 3000;
 app.listen(PORT, () => {
-  console.log(`🚀 服务器运行在端口 ${PORT}`);
-  console.log(`📍 首页: http://localhost:${PORT}`);
-  console.log(`📍 健康检查: http://localhost:${PORT}/health`);
-  console.log(`📍 API文档: http://localhost:${PORT}/api`);
+  console.log("服务器运行在端口 3000");
 });
