@@ -13,13 +13,13 @@
 ## 快速开始
 
 1. 安装依赖: 
-pm install
+npm install
 2. 启动服务: 
-pm run dev
+npm run dev
 3. 访问: http://localhost:3000
 
 ## 作者
-2024131012
+2024131012 陈家莉
 =======
 # task-api-service_12
 >>>>>>> 4587c2a88f9387f6f77747d3725bdf072e94e885
