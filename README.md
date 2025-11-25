@@ -63,10 +63,9 @@ npm run dev
 # 生产模式
 npm start
 
-## 第五步：添加 API 文档
+# 添加 API 文档
 
 ```powershell
-@'
 
 ## API 文档
 
