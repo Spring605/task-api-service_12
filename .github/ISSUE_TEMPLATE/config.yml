@@ -1,15 +1,8 @@
-﻿{
-  "blank_issues_enabled": false,
-  "contact_links": [
-    {
-      "name": "项目文档",
-      "url": "https://github.com/your-username/task-api-service_12#readme",
-      "about": "请先阅读项目文档，可能已经包含你需要的答案"
-    },
-    {
-      "name": "技术讨论",
-      "url": "https://github.com/your-username/task-api-service_12/discussions",
-      "about": "欢迎在 Discussions 中进行技术交流和想法分享"
-    }
-  ]
-}
+﻿blank_issues_enabled: false
+contact_links:
+  - name: "查看项目文档"
+    url: "https://github.com/Spring605/task-api-service_12#readme"
+    about: "请先阅读项目文档，可能已经包含你需要的答案"
+  - name: "参与技术讨论"
+    url: "https://github.com/Spring605/task-api-service_12/discussions"
+    about: "欢迎在 Discussions 中进行技术交流和想法分享"
