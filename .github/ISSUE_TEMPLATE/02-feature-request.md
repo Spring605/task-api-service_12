@@ -8,8 +8,7 @@ body:
   - type: markdown
     attributes:
       value: |
-        ## 欢迎提出功能建议！
-        你的想法会让项目变得更好。
+        欢迎提出功能建议！你的想法会让项目变得更好。
 
   - type: textarea
     id: description
@@ -32,10 +31,7 @@ body:
     attributes:
       label: "建议方案"
       description: "你期望的实现方式"
-      placeholder: |
-        建议在任务模型中添加 category 字段
-        新增 GET /api/categories 端点管理分类
-        支持按分类筛选任务
+      placeholder: "建议在任务模型中添加 category 字段，支持按分类筛选任务"
 
   - type: textarea
     id: alternatives
@@ -56,25 +52,10 @@ body:
     validations:
       required: true
 
-  - type: checkboxes
-    id: involvement
-    attributes:
-      label: "参与意愿"
-      description: "你是否愿意参与这个功能的开发？"
-      options:
-        - label: "我愿意参与这个功能的开发和测试"
-          required: false
-        - label: "我可以提供详细的需求说明"
-          required: false
-
   - type: textarea
     id: acceptance
     attributes:
       label: "验收标准"
       description: "功能完成的标准是什么？"
-      placeholder: |
-        - [ ] 可以创建、编辑、删除分类
-        - [ ] 任务可以分配分类
-        - [ ] 支持按分类筛选任务
-        - [ ] 相关 API 文档完善
+      placeholder: "可以创建分类，任务可以分配分类，支持按分类筛选任务"
 ---

@@ -8,8 +8,7 @@ body:
   - type: markdown
     attributes:
       value: |
-        ## 欢迎提问！
-        我们会尽力解答你的问题。
+        欢迎提问！我们会尽力解答你的问题。
 
   - type: textarea
     id: question
@@ -32,20 +31,14 @@ body:
     attributes:
       label: "已尝试的方案"
       description: "你已经尝试过哪些解决方法？"
-      placeholder: |
-        - 查看了 README.md 的部署章节
-        - 搜索了现有的 Issue
-        - 尝试了默认的 MongoDB 配置
+      placeholder: "查看了 README.md，搜索了现有的 Issue"
 
   - type: textarea
     id: environment
     attributes:
       label: "相关环境"
       description: "与问题相关的环境信息"
-      placeholder: |
-        - 部署环境: Ubuntu 20.04
-        - 数据库: MongoDB 5.0
-        - Node.js 版本: 18.17.0
+      placeholder: "部署环境: Ubuntu, 数据库: MongoDB, Node.js 版本: 18.17.0"
 
   - type: checkboxes
     id: search
@@ -56,11 +49,4 @@ body:
           required: true
         - label: "我已经阅读过项目文档"
           required: true
-
-  - type: textarea
-    id: references
-    attributes:
-      label: "参考资料"
-      description: "任何相关的文档链接或参考资料"
-      placeholder: "https://github.com/username/task-api-service_12/blob/main/README.md"
 ---

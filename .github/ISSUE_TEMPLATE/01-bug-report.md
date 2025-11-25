@@ -8,8 +8,7 @@ body:
   - type: markdown
     attributes:
       value: |
-        ## 感谢报告 Bug！
-        请详细描述问题，帮助我们改进项目质量。
+        感谢报告 Bug！请详细描述问题，帮助我们改进项目质量。
 
   - type: textarea
     id: description
@@ -55,14 +54,12 @@ body:
         - 操作系统: Windows 11
         - Node.js 版本: 18.17.0
         - 浏览器: Chrome 120
-        - API 端点: POST /api/tasks
 
   - type: textarea
     id: logs
     attributes:
       label: "错误日志/截图"
       description: "如果有错误日志或截图，请在此处提供"
-      placeholder: "错误信息: Cannot read property 'title' of undefined"
 
   - type: checkboxes
     id: terms
@@ -71,6 +68,4 @@ body:
       options:
         - label: "我已经搜索过现有的 Issue，没有找到相同问题"
           required: true
-        - label: "我愿意协助解决这个问题"
-          required: false
 ---

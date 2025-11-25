@@ -8,8 +8,7 @@ body:
   - type: markdown
     attributes:
       value: |
-        ## 文档是项目的重要组成部分
-        感谢你帮助改进项目文档！
+        文档是项目的重要组成部分，感谢你帮助改进项目文档！
 
   - type: textarea
     id: description
@@ -25,10 +24,7 @@ body:
     attributes:
       label: "相关位置"
       description: "问题所在的文档文件或章节"
-      placeholder: |
-        - 文件: README.md
-        - 章节: API 文档部分
-        - 具体内容: 错误处理说明
+      placeholder: "文件: README.md, 章节: API 文档部分"
 
   - type: textarea
     id: current
@@ -42,11 +38,7 @@ body:
     attributes:
       label: "期望内容"
       description: "你期望的文档内容"
-      placeholder: |
-        希望包含：
-        - 完整的错误码列表
-        - 错误响应示例
-        - 常见问题排查
+      placeholder: "希望包含完整的错误码列表和错误响应示例"
 
   - type: dropdown
     id: type
@@ -56,18 +48,7 @@ body:
         - 内容缺失
         - 内容错误
         - 格式问题
-        - 翻译问题
         - 其他
     validations:
       required: true
-
-  - type: checkboxes
-    id: contribution
-    attributes:
-      label: "贡献意愿"
-      options:
-        - label: "我愿意直接提交文档改进的 PR"
-          required: false
-        - label: "我需要指导来完成文档改进"
-          required: false
 ---
