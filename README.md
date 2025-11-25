@@ -1,127 +1,219 @@
-﻿# TaskFlow API - 12
-
-**学号：2024131012**
-
-一个基于 Node.js 和 Express 的现代化 RESTful API 任务管理系统
+﻿# TaskFlow API Service - 12
 
 ## 项目概述
 
-TaskFlow API 是一个完整的任务管理后端服务，采用现代化的技术栈构建，提供稳定可靠的 RESTful API 接口。项目涵盖了任务管理系统的核心业务流程，包括用户管理、任务CRUD操作、数据验证、错误处理等完整功能。
+TaskFlow API 是一个基于 Node.js 平台构建的现代化任务管理后端服务。本项目采用 Express.js 框架，实现了完整的 RESTful API 设计，为前端应用提供稳定可靠的任务数据管理能力。作为学术实践项目，重点展示了模块化架构设计和规范的开发流程。
 
-## 核心特性
+## 核心功能模块
 
-### 完整的任务管理流程
-- **任务生命周期**：创建 → 更新 → 完成 → 删除
-- **状态管理**：任务状态跟踪（待处理、进行中、已完成）
-- **优先级控制**：多级优先级管理（低、中、高）
-- **时间管理**：截止日期设置，创建时间记录
+### 任务管理中心
+- 智能任务创建：支持任务标题、描述、状态、优先级等多维度属性设置
+- 动态任务查询：提供基于状态和优先级的实时筛选机制
+- 任务状态流转：实现待处理、进行中、已完成的全生命周期管理
+- 批量操作支持：内置任务列表分页和排序功能
 
-### 安全的用户系统
-- **数据验证**：使用 Joi 进行请求参数验证
-- **错误处理**：统一的错误处理机制和友好的错误信息
-- **输入清理**：防止非法输入和注入攻击
+### 服务健康保障
+- 实时状态监控：健康检查接口提供系统运行状态反馈
+- 统一错误处理：标准化的错误响应格式和状态码管理
+- 请求验证机制：完善的参数校验和数据类型检查
 
-### 智能任务管理
-- **多维度筛选**：支持按状态、优先级进行条件筛选
-- **分页查询**：支持分页参数控制返回数据量
-- **组合查询**：支持多条件组合筛选任务
+### 数据管理架构
+- 内存数据存储：当前版本采用高性能内存数据管理
+- 可扩展设计：预留 MongoDB 数据库集成接口
+- 数据持久化：支持服务重启后的数据恢复机制
 
-## 技术选型
+## 技术实现细节
 
-### 后端技术栈
-| 技术 | 版本 | 说明 |
-|------|------|------|
-| Node.js | 18.0+ | JavaScript 运行时环境 |
-| Express.js | 4.18+ | Web 应用框架 |
-| 内存存储 | - | 当前使用内存数据存储 |
-| Joi | 17.0+ | 数据验证库 |
+### 服务端架构
+- 运行时环境：Node.js 18.0+ LTS 版本
+- Web 框架：Express.js 4.18.2 稳定版本
+- 开发范式：基于中间件的请求处理管道
+- 代码规范：ES6+ 语法标准和模块化组织
+
+### 接口设计规范
+- RESTful 原则：严格遵循资源导向的 API 设计理念
+- HTTP 方法映射：GET/POST/PUT/DELETE 与 CRUD 操作精确对应
+- 状态码标准化：200系列成功响应，400系列客户端错误，500系列服务端错误
+- 数据格式统一：JSON 作为唯一数据交换格式
 
 ### 开发工具链
-| 工具 | 用途 | 优势 |
-|------|------|------|
-| Visual Studio Code | 开发 IDE | 强大的代码提示和调试功能 |
-| Postman | API 测试 | 接口调试，文档生成 |
-| Git | 版本控制 | 代码管理，团队协作 |
-| Nodemon | 开发工具 | 自动重启，提升开发效率 |
+- 包管理器：npm 8.0+ 依赖管理
+- 开发调试：Nodemon 实时热重载
+- 代码质量：ESLint 代码规范检查
+- 版本控制：Git 分布式版本管理
 
-## 快速开始
+## 快速部署指南
 
-### 环境要求
-- Node.js: 18.0 或更高版本
-- npm: 8.0 或更高版本
+### 环境准备阶段
+```bash
+# 验证 Node.js 环境
+node --version
+npm --version
 
-### 运行步骤
+# 克隆项目代码
+git clone https://github.com/Spring605/task-api-service_12.git
+cd task-api-service_12
+```
 
-1. **克隆项目**
-   ```bash
-   git clone https://github.com/your-username/task-api-service_12.git
-   cd task-api-service_12
+### 依赖安装配置
+```bash
+# 安装项目依赖包
 npm install
-# 开发模式
+
+# 生产环境优化安装
+npm install --production
+```
+
+### 服务启动流程
+```bash
+# 开发环境启动（支持代码热更新）
 npm run dev
 
-# 生产模式
+# 生产环境启动
 npm start
 
-# 添加 API 文档
+# 服务验证访问
+curl http://localhost:3000/health
+```
 
-```powershell
+### 环境变量配置
+创建 .env 配置文件：
+```env
+PORT=3000
+NODE_ENV=development
+JWT_SECRET=taskflow_api_2025_secure_key
+MONGODB_URI=mongodb://localhost:27017/taskflow
+```
 
-## API 文档
+## API 接口文档
 
-### 基础端点
-`GET /` - 项目首页（HTML文档）
-`GET /health` - 服务健康检查
-`GET /api` - API 文档概览（JSON格式）
+### 服务状态接口
+| 方法 | 端点 | 功能描述 | 状态码 |
+|------|------|----------|--------|
+| GET | / | 服务欢迎页面 | 200 |
+| GET | /health | 系统健康状态检查 | 200 |
 
 ### 任务管理接口
-`GET /api/tasks` - 获取任务列表（支持筛选、分页）
-`POST /api/tasks` - 创建新任务
-`GET /api/tasks/:id` - 获取任务详情
-`PUT /api/tasks/:id` - 更新任务
-`DELETE /api/tasks/:id` - 删除任务
+| 方法 | 端点 | 请求参数 | 响应示例 |
+|------|------|----------|----------|
+| GET | /api/tasks | ?status=pending&priority=high | 任务列表 |
+| POST | /api/tasks | JSON 任务对象 | 创建结果 |
+| GET | /api/tasks/:id | 任务ID参数 | 任务详情 |
+| PUT | /api/tasks/:id | JSON 更新数据 | 更新结果 |
+| DELETE | /api/tasks/:id | 任务ID参数 | 删除确认 |
 
-### 查询参数
-`status` - 按状态筛选（pending, in-progress, completed）
-`priority` - 按优先级筛选（low, medium, high）
-`page` - 页码（默认: 1）
-`limit` - 每页数量（默认: 10）
+### 请求示例
+```http
+POST /api/tasks HTTP/1.1
+Content-Type: application/json
 
-## 项目架构
+{
+  "title": "API 接口测试任务",
+  "description": "验证任务创建功能的完整性",
+  "status": "pending",
+  "priority": "high"
+}
+```
 
+### 响应示例
+```json
+{
+  "message": "任务创建成功",
+  "task": {
+    "id": 5,
+    "title": "API 接口测试任务",
+    "status": "pending",
+    "priority": "high",
+    "createdAt": "2025-11-18T10:30:00.000Z"
+  }
+}
+```
+
+## 项目目录架构
+
+```
 task-api-service_12/
-├── controllers/      # 控制器层
-├── middleware/       # 中间件
-├── routes/           # 路由层
-├── tests/            # 测试文件
-├── docs/             # 项目文档
-├── .github/          # GitHub 配置
-├── server.js         # 应用入口
-├── package.json      # 项目配置
-└── README.md         # 项目说明
+├── server.js
+├── package.json
+├── package-lock.json
+├── .env
+├── .gitignore
+├── README.md
+├── CONTRIBUTING.md
+├── CHANGELOG.md
+├── LICENSE
+├── docs/
+│   ├── API_DOCUMENTATION.md
+│   └── DEPLOYMENT.md
+└── .github/
+    └── ISSUE_TEMPLATE/
+        ├── bug-report.md
+        ├── feature-request.md
+        └── question.md
+```
 
-## 项目状态
+## 开发协作规范
 
-### 已完成功能
-项目基础架构
-RESTful API 设计
-任务CRUD操作
-数据验证和错误处理
-健康检查接口
-完整项目文档
+### 代码提交标准
+- feat: 新增功能特性
+- fix: 问题修复处理
+- docs: 文档内容更新
+- refactor: 代码重构优化
+- test: 测试用例相关
 
-### 规划中功能
-用户认证系统（JWT）
-数据库集成（MongoDB）
-单元测试覆盖
-前端管理界面
+### 分支管理策略
+- main - 生产就绪主分支
+- develop - 功能集成开发分支
+- feature/* - 新功能开发分支
+- hotfix/* - 紧急问题修复分支
 
-## 许可证
+### 质量保障要求
+- 代码提交前执行基础验证
+- 主要功能模块需要测试覆盖
+- API 接口变更更新对应文档
+- 重大调整需要团队代码审查
 
-本项目基于 MIT 许可证 - 查看 LICENSE 文件了解详情。
+## 扩展发展规划
 
-## 作者
+### 近期技术迭代
+- [ ] JWT 令牌认证系统集成
+- [ ] MongoDB 数据库持久化存储
+- [ ] 单元测试框架全面覆盖
+- [ ] API 接口文档自动化生成
 
-2024131012
+### 中期功能演进
+- [ ] 用户权限和角色管理
+- [ ] 任务分类和标签系统
+- [ ] 文件上传和附件管理
+- [ ] 实时消息通知机制
 
-如果这个项目对你有帮助，请给个 Star 支持！
+### 长期架构升级
+- [ ] 微服务架构拆分改造
+- [ ] 容器化部署和编排
+- [ ] 性能监控和日志分析
+- [ ] 多租户数据隔离支持
+
+## 学习价值体现
+
+通过本项目实践，深入掌握以下核心技术：
+
+1. 后端开发基础：Node.js 运行时和 Express 框架原理
+2. API 设计理念：RESTful 架构风格和最佳实践
+3. 工程化管理：版本控制、依赖管理和项目文档
+4. 质量保障：错误处理、数据验证和测试方法
+5. 协作开发：Git 工作流和团队协作规范
+
+## 开源许可证
+
+本项目基于 MIT 开源许可证发布，允许自由使用、修改和分发。详细条款请参阅 LICENSE 文件。
+
+## 项目信息
+
+- 开发者：2024131012
+- 仓库地址：https://github.com/Spring605/task-api-service_12
+- 问题反馈：https://github.com/Spring605/task-api-service_12/issues
+- 技术讨论：https://github.com/Spring605/task-api-service_12/discussions
+
+---
+
+如果本项目对您的学习有所帮助，请给予 Star 支持鼓励！
