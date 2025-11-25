@@ -70,22 +70,22 @@ npm start
 ## API 文档
 
 ### 基础端点
-- `GET /` - 项目首页（HTML文档）
-- `GET /health` - 服务健康检查
-- `GET /api` - API 文档概览（JSON格式）
+`GET /` - 项目首页（HTML文档）
+`GET /health` - 服务健康检查
+`GET /api` - API 文档概览（JSON格式）
 
 ### 任务管理接口
-- `GET /api/tasks` - 获取任务列表（支持筛选、分页）
-- `POST /api/tasks` - 创建新任务
-- `GET /api/tasks/:id` - 获取任务详情
-- `PUT /api/tasks/:id` - 更新任务
-- `DELETE /api/tasks/:id` - 删除任务
+`GET /api/tasks` - 获取任务列表（支持筛选、分页）
+`POST /api/tasks` - 创建新任务
+`GET /api/tasks/:id` - 获取任务详情
+`PUT /api/tasks/:id` - 更新任务
+`DELETE /api/tasks/:id` - 删除任务
 
 ### 查询参数
-- `status` - 按状态筛选（pending, in-progress, completed）
-- `priority` - 按优先级筛选（low, medium, high）
-- `page` - 页码（默认: 1）
-- `limit` - 每页数量（默认: 10）
+`status` - 按状态筛选（pending, in-progress, completed）
+`priority` - 按优先级筛选（low, medium, high）
+`page` - 页码（默认: 1）
+`limit` - 每页数量（默认: 10）
 
 ## 项目架构
 
@@ -103,18 +103,18 @@ task-api-service_12/
 ## 项目状态
 
 ### 已完成功能
-- 项目基础架构
-- RESTful API 设计
-- 任务CRUD操作
-- 数据验证和错误处理
-- 健康检查接口
-- 完整项目文档
+项目基础架构
+RESTful API 设计
+任务CRUD操作
+数据验证和错误处理
+健康检查接口
+完整项目文档
 
 ### 规划中功能
-- 用户认证系统（JWT）
-- 数据库集成（MongoDB）
-- 单元测试覆盖
-- 前端管理界面
+用户认证系统（JWT）
+数据库集成（MongoDB）
+单元测试覆盖
+前端管理界面
 
 ## 许可证
 
